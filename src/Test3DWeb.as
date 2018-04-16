@@ -26,7 +26,7 @@ package{
 	{
 		private var scene:Scene3D;
 		private var camera:Camera3D;
-		private var box:Box;
+//		private var box:Box;
 		private var sphere:Sphere;
 		
 		public function Test3DWeb() {
@@ -38,16 +38,17 @@ package{
 			var root:Group = new Group();
 			
 			//添加盒子
-			box = new Box("box", 100, 100, 100, "tri");//mode: tri（三角） quad（平）
+//			box = new Box("box", 100, 100, 100, "tri");//mode: tri（三角） quad（平）
 			sphere = new Sphere("sphere",100,20,20);
-			root.addChild(box);
+//			root.addChild(box);
 			root.addChild(sphere);
 
 			//设置立方体的贴图
 			loadImg(function(bd:BitmapData):void{
 				var material:BitmapMaterial = new BitmapMaterial( bd );
 				var app:Appearance = new Appearance( material );
-				box.appearance = app;
+//				box.appearance = app;
+				sphere.appearance = app;
 			});
 			
 			//创建场景
@@ -57,16 +58,18 @@ package{
 			addEventListener( Event.ENTER_FRAME, enterFrameHandler );
 		}
 		public function enterFrameHandler(_evt:Event):void {
-			box.rotateX += 4;
-			box.rotateY += 4;
-			box.rotateZ += 4;
+//			box.rotateX += 4;
+//			box.rotateY += 4;
+//			box.rotateZ += 4;
 //			box.rotateX = -mouseY/2;
 //			box.rotateY = mouseX/2;
 			
 			sphere.rotateX += 4;
 			sphere.rotateY += 4;
 			sphere.rotateZ += 4;
-			
+//			sphere.rotateX = -mouseX;
+//			sphere.rotateY = -mouseY;
+
 			scene.render();
 		}
 		
