@@ -26,12 +26,13 @@ package{
 	{
 		private var scene:Scene3D;
 		private var camera:Camera3D;
-//		private var box:Box;
+		private var box:Box;
 		private var sphere:Sphere;
 		
 		public function Test3DWeb() {
 			//创建一个摄像机
 			camera = new Camera3D(300, 300);
+//			camera.z = -300;
 			camera.z = -300;
 			
 			//创建一个 Group
@@ -39,8 +40,10 @@ package{
 			
 			//添加盒子
 //			box = new Box("box", 100, 100, 100, "tri");//mode: tri（三角） quad（平）
-			sphere = new Sphere("sphere",100,20,20);
 //			root.addChild(box);
+			
+			//添加球体
+			sphere = new Sphere("sphere",100,20,20);
 			root.addChild(sphere);
 
 			//设置立方体的贴图
@@ -64,9 +67,9 @@ package{
 //			box.rotateX = -mouseY/2;
 //			box.rotateY = mouseX/2;
 			
-			sphere.rotateX += 4;
-			sphere.rotateY += 4;
-			sphere.rotateZ += 4;
+//			sphere.rotateX += 1;
+			sphere.rotateY += 0.5;
+//			sphere.rotateZ += 1;
 //			sphere.rotateX = -mouseX;
 //			sphere.rotateY = -mouseY;
 
