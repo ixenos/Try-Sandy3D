@@ -6,8 +6,10 @@ package{
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
+	import flash.ui.Keyboard;
 	
 	import sandy.core.Scene3D;
 	import sandy.core.scenegraph.Camera3D;
@@ -32,7 +34,6 @@ package{
 		public function Test3DWeb() {
 			//创建一个摄像机
 			camera = new Camera3D(300, 300);
-//			camera.z = -300;
 			camera.z = -300;
 			
 			//创建一个 Group
@@ -59,7 +60,32 @@ package{
 			
 			//创建实时侦听
 			addEventListener( Event.ENTER_FRAME, enterFrameHandler );
+			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown);
 		}
+		
+		private function onKeyDown(evt:KeyboardEvent):void{
+			var p_x:Number = camera.x;
+			var p_y:Number = camera.y;
+			var p_z:Number = camera.z;
+			if(evt.keyCode == Keyboard.DOWN){
+				camera.tilt += 2;
+			}else if(evt.keyCode == Keyboard.UP){
+				camera.tilt += -2;
+			}else if(evt.keyCode == Keyboard.LEFT){
+				camera.pan += -2;
+			}else if(evt.keyCode == Keyboard.RIGHT){
+				camera.pan += 2;
+			}else if(evt.keyCode == Keyboard.CONTROL){
+				camera.roll += 2;
+			}else if(evt.keyCode == Keyboard.SHIFT){
+				camera.roll += -2;
+			}else if(evt.keyCode == Keyboard.NUMPAD_ADD){
+				camera.z += 3;
+			}else if(evt.keyCode == Keyboard.NUMPAD_SUBTRACT){
+				camera.z += -3;
+			}
+		}
+		
 		public function enterFrameHandler(_evt:Event):void {
 //			box.rotateX += 4;
 //			box.rotateY += 4;
@@ -90,11 +116,12 @@ package{
 			var onLoadImgProgress:Function=function(evt:ProgressEvent):void{
 			}
 			var onLoadImgError:Function=function(evt:Event):void{
+				trace("loadImageError");
 			}
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS,onLoadImgProgress);
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoadImgComplete);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onLoadImgError);
-			var rq:URLRequest=new URLRequest("image/006549905198527cbce56d05db0e0bd5.jpg");
+			var rq:URLRequest=new URLRequest("image/1.jpg");
 			loader.load(rq);
 		}
 	}
